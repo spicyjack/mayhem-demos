@@ -26,14 +26,14 @@ LDFLAGS=-L/usr/local/lib
 LD_LIBRARY_PATH=/usr/local/lib
 PKG_CONFIG_PATH=/usr/local/lib
 # for compact/larger
-CONFIGURE_IMG="../docs/pix/configure.16x16.png"
+CONFIGURE_IMG="../docs.git/pix/configure.16x16.png"
 # for compact
-MAYHEM_SMALL="../docs/pix/mayhem-logo.neon.orange-300x72.jpg"
+MAYHEM_SMALL="../docs.git/pix/mayhem-logo.neon.orange-300x72.jpg"
 # for larger
-MAYHEM_TOP="../docs/pix/mayhem-logo.text.neon.orange-300x75.jpg"
-MAYHEM_LEFT="../docs/pix/mohawkb-skinny-150x234.jpg"
+MAYHEM_TOP="../docs.git/pix/mayhem-logo.text.neon.orange-300x75.jpg"
+MAYHEM_LEFT="../docs.git/pix/mohawkb-skinny-150x234.jpg"
 # for splashscreen
-MAYHEM_SPLASH="../docs/pix/mayhem-logo.neon.orange-500x109.jpg"
+MAYHEM_SPLASH="../docs.git/pix/mayhem-logo.neon.orange-500x109.jpg"
 
 ### FUNCTIONS ###
 # check the status of the last run command; run a shell if it's anything but 0
