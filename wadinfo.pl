@@ -62,7 +62,7 @@ if ( exists $opts{d} ) {
 } elsif ( exists $opts{D} ) {
     # really noisy
     $z{DEBUG} = 2;
-} # if ( exists $opts{d} )
+}
 
 # make sure we were passed a path to search for WAD files
 # or a file with wadfile names in it
@@ -92,7 +92,7 @@ if ( exists $opts{f} ) {
     print "\n";
 
     exit 1;
-} # if ( exists $opts{} )
+}
 
 # see where we are writing the output to
 # make sure the output file can be written to
@@ -104,7 +104,7 @@ if ( exists $opts{o} ) {
 } else {
     # set the output to STDOUT
     $out = *STDOUT;
-} # if ( exists $opts{o} )
+}
 
 =pod
 
@@ -199,7 +199,7 @@ foreach $file (@filelist) {
     # put together the first 4 bytes into a string
     for ($x = 0; $x <= 3; $x++) {
         $walk{wadtype} .= chr(hex($bytes[$x]));
-    } # for ($x = 0; $x >= 3; $x++)
+    }
     # check the first 4 bytes for the string 'PWAD'
     if ( $walk{wadtype} eq 'IWAD' ) {
         print $out $file . ": IWAD found\n" if $z{DEBUG};
@@ -212,7 +212,7 @@ foreach $file (@filelist) {
         for (my $y = 11; $y >= 8; $y--) {
             $offset .= $bytes[$y];
             #print "y is $y, offset is $offset\n" if $z{DEBUG};
-        } # for ($y = $length; $y >= $length - 5; $y--)
+        }
         print $out $z{p_n} . ": offset is $offset, hex(offset) is " .
                 hex($offset) . "\n" if ( defined $z{DEBUG} && $z{DEBUG} > 1);
         # set the starting offset (convert from hex)
@@ -230,8 +230,8 @@ foreach $file (@filelist) {
             for ($tmp = 8; $tmp <= 15; $tmp++) {
                 if ( chr(hex($bytes[$tmp])) =~ /\w/  ) {
                     $string = $string . chr(hex($bytes[$tmp]));
-                } # if ( chr(hex($bytes[$tmp]) =~ /\w/ )
-            } #for (my $tmp = 8; $tmp = 15; $tmp++)
+                }
+            }
             # this should catch M?P or E?M strings
 
             if ( (defined $string) &&
@@ -241,7 +241,7 @@ foreach $file (@filelist) {
                     $string = substr($string, 0, 5);
                 } elsif ( $string =~ /^E\dM\d/ ) {
                     $string = substr($string, 0, 4);
-                } # if ( $string =~ /^MAP\d\d/ )
+                }
                 if ( $printfile == 0 && $z{DEBUG} ) {
                     if ( $z{total_files} > 0 ) { print $out "\n";}
                     print $out $z{p_n} . ": " . $file . " - PWAD found\n";
@@ -252,9 +252,9 @@ foreach $file (@filelist) {
                     print $out $file . "=";
                     if ( exists $opts{c} ) {
                         print STDERR "Found $z{total_files} valid WAD files\r";
-                    } # if ( defined $opt{c} )
+                    }
                     $printfile = 1;
-                } # if ( $z{DEBUG} )
+                }
                 # output the actual bytes
                 print $out $string . " ";
                 print $out "\n".$z{p_n}.": found $string, " .
@@ -265,17 +265,17 @@ foreach $file (@filelist) {
             $dircount++;
             $walk{offset} += 16; # add 16 to go to the next entry
             #if ($dircount == 20 && $z{DEBUG}) {exit 1;}
-        } # while ($walk{offset} < $walk{filesize})
+        }
         # a last newline behind the list of levels
         #print "\n";
-    } #  elsif ( $walk{wadtype} ne 'PWAD'
+    }
     # update the total files checked
     $z{total_files}++;
     if ($z{total_files} == 20  && $z{DEBUG}) {exit 1;}
     #if ($z{total_files} == 20 ) {exit 1;}
     # zero out the wadtype
     $walk{wadtype} = "";
-} # foreach $file (@filelist)
+}
 
 # add an extra newline for the end
 print $out "\n";
@@ -286,17 +286,17 @@ $z{total_min} = $z{total_time} / 60;
 if ( $z{DEBUG} ) {
     print $out $z{p_n} . ": Checked " . $z{total_files} . " WAD files in " .
         $z{total_time} . " seconds, or " . $z{total_min} . " minutes.\n";
-} # if ( $z{DEBUG} )
+}
 
 # check to see if there was an output filehandle opened, and close it
 if ( exists $opts{o} ) {
     close($out);
-} # if ( exists $opts{o} )
+}
 
 if ( exists $opts{c} ) {
     # print a \n to STDERR so the command line doesn't overwrite the WAD count
     print STDERR "\n";
-} # if ( exists $opts{c} )
+}
 
 exit 0;
 
@@ -334,13 +334,13 @@ sub ReadFile {
             push(@return, "f");
         #    die "x $x / readsize " . $$ptr{readsize} . " / length "
         #        . length($wadid);
-        } # if ( length($wadid) == $$ptr{readsize} )
-    } # for ($x = 0; $x != 12; $x++)
+        }
+    }
     # print and return the put-together string
     print $$z{p_n} . ": returning @return\n"
         if ( defined $z{DEBUG} && $z{DEBUG} > 1);
     return @return;
-} # sub ReadFile
+}
 
 =pod
 
